@@ -22,13 +22,12 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        # Flask와 Pillow 추가 설치
         pip install pyinstaller requests flask pillow
 
     - name: Build EXE
       run: |
-        # Flask용 templates 폴더와 이미지 파일을 모두 EXE에 포함
-        pyinstaller --onefile --add-data "ghost_image.png;." --add-data "templates;templates" main.py
+        # templates 에러를 해결하기 위해 해당 경로 제외
+        pyinstaller --onefile --add-data "ghost_image.png;." main.py
   
     - name: Upload artifact
       uses: actions/upload-artifact@v4
